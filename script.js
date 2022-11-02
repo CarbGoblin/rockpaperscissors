@@ -1,58 +1,60 @@
 /*RPS Algorithm*/
 
-//Randomly select rock, paper, or scissors
-//Prompt user to type rock, paper, or scissor
-//Add user selection to a variable
-//Compare user selection to computerSelection
-//if userSelection === scissor && computerSelection === paper then user wins
-//else if user selection === scissor && computerSelection === rock then computer wins
-//else if user selection === scissor && computerSelection === scissor then tie
-//else if userSelection === rock && computer selection === rock then tie
-//else if userSelection === rock && compuerSelection === paper then computer wins
-//else if userSelection === rock && computerSelection === scissors then user wins
-//else if userSelection === paper && computer selection === rock then user wins
-//else if userSelection === paper && compuerSelection === paper then tie
-//else if userSelection === paper && computerSelection === scissors then computer wins
+//Array for computer to choose from
 const choices = [
     "rock",
     "paper",
     "scissors"
 ];
 
+//Get computer's choice
 function getComputerChoice() {
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
-const computerChoice = getComputerChoice();
+let computerChoice = getComputerChoice();
 console.log("Computer chose " + `${computerChoice}` + "!");
 
-const playerChoice = prompt("Choose Rock, Paper, or Scissors").toLocaleLowerCase();
+//Get player's choice
+let playerChoice = prompt("Choose Rock, Paper, or Scissors").toLocaleLowerCase();
 if (playerChoice === "paper" || playerChoice === "scissors" || playerChoice === "rock") {
     console.log("You chose " + `${playerChoice}` + "!");
 } else {
     console.log("Error! Try again!");
 }
 
+//Declare a winner
+
+//Player chooses rock
 function playRound(playerChoice, computerChoice) {
-    if (playerChoice === "rock" && computerChoice === "rock") {
-        console.log("Tie!")
-    } else if (playerChoice === "rock" && computerChoice === "paper") {
-        console.log("Computer Wins!")
-    } else if (playerChoice === "rock" && computerChoice === "scissors") {
-        console.log("Player Wins!")
-    } else if (playerChoice === "paper" && computerChoice === "rock") {
-        console.log("Player Wins!")
-    } else if (playerChoice === "paper" && computerChoice === "paper") {
-        console.log("Tie!")
-    } else if (playerChoice === "paper" && computerChoice === "scissors") {
-        console.log("Computer Wins!")
-    } else if (playerChoice === "scissors" && computerChoice === "rock") {
-        console.log("Computer Wins!")
-    } else if (playerChoice === "scissors" && computerChoice === "paper") {
-        console.log("Player Wins!")
-    } else if (playerChoice === "scissors" && computerChoice === "scissors") {
-        console.log("Tie!")
-    }
+    if (playerChoice === 'rock') {
+        if (computerChoice === 'rock') {
+            console.log('A draw!');
+        } else if (computerChoice === 'paper') {
+            console.log('You lose! Paper beats rock!');
+        } else if (computerChoice === 'scissors') {
+            console.log('You win! Rock beats scissors!');
+        }
+//Player chooses paper        
+    } else if (playerChoice === 'paper') {
+        if (computerChoice === 'rock') {
+            console.log('You win! Paper beats rock!');
+        } else if (computerChoice === 'paper') {
+            console.log('A draw!');
+        } else if (computerChoice === 'scissors') {
+            console.log('You lose! Scissors beats paper!');
+        }
+//Player chooses scissors        
+    } else if (playerChoice === 'scissors') {
+        if (computerChoice === 'rock') {
+            console.log('You lose! Rock beats Scissors');
+        } else if (computerChoice === 'paper') {
+            console.log('You win! Scissors beats paper!');
+        } else if (computerChoice === 'scissors') {
+            console.log('A draw!');
+        }
+    }  
 }
 
-playRound();
+//Play a round
+playRound(playerChoice, computerChoice);
