@@ -6,6 +6,11 @@ const choices = [
     "paper",
     "scissors"
 ];
+let win = 'You win!'
+let lose = 'You lose!'
+let tie = 'A draw!'
+let playerScore = parseInt(0);
+let computerScore = parseInt(0);
 
 //Get computer's choice
 function getComputerChoice() {
@@ -29,32 +34,54 @@ if (playerChoice === "paper" || playerChoice === "scissors" || playerChoice === 
 function playRound(playerChoice, computerChoice) {
     if (playerChoice === 'rock') {
         if (computerChoice === 'rock') {
-            console.log('A draw!');
+            return tie;
         } else if (computerChoice === 'paper') {
-            console.log('You lose! Paper beats rock!');
+            computerScore++;
+            return lose + 'Paper beats Rock!';
         } else if (computerChoice === 'scissors') {
-            console.log('You win! Rock beats scissors!');
+            playerScore++;
+            return win + 'Rock beats scissors!';
         }
 //Player chooses paper        
     } else if (playerChoice === 'paper') {
         if (computerChoice === 'rock') {
-            console.log('You win! Paper beats rock!');
+            playerScore++;
+            return win + 'Paper beats rock';
         } else if (computerChoice === 'paper') {
-            console.log('A draw!');
+            return tie;
         } else if (computerChoice === 'scissors') {
-            console.log('You lose! Scissors beats paper!');
+            computerScore++;
+            return lose + 'Scissors beats paper!';
         }
 //Player chooses scissors        
     } else if (playerChoice === 'scissors') {
         if (computerChoice === 'rock') {
-            console.log('You lose! Rock beats Scissors');
+            computerScore++;
+            return lose + 'Rock beats scissors!';
         } else if (computerChoice === 'paper') {
-            console.log('You win! Scissors beats paper!');
+            playerScore++;
+            return win + 'Scissors beats paper!';
         } else if (computerChoice === 'scissors') {
-            console.log('A draw!');
+            return tie;
         }
     }  
 }
 
-//Play a round
-playRound(playerChoice, computerChoice);
+for(let i=0; i<5; i++) {
+    let playerChoice = prompt('Pick a move');
+    const computerChoice = getComputerChoice();
+    console.log(playRound(playerChoice, computerChoice));
+    console.log("Your score = " + playerScore);
+    console.log("Computer's score = " + computerScore);
+    declareWinner();
+}
+
+function declareWinner() {
+    if(playerScore > computerScore) {
+        console.log("You Win!");
+    } else if(playerScore < computerScore) {
+        console.log("You Lose!");
+    } else if(playerScore == computerScore) {
+        console.log("The game is a draw!");
+    }
+}
